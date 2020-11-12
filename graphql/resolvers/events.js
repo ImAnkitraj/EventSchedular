@@ -75,14 +75,14 @@ module.exports = {
             description: args.eventInput.description,
             start: new Date(args.eventInput.start),
             end: new Date(args.eventInput.end),
-            creator: "5faa31e070cba42ea8a34698",
+            creator: req.userId
         });
         let createdEvent ;
         return event
             .save()
             .then(res=>{
                 createdEvent = transformEvent(res);
-                return User.findById("5faa31e070cba42ea8a34698");
+                return User.findById(req.userId);
             })
             .then(user => {
                 if(!user){

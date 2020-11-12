@@ -1,0 +1,31 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+}
+.calendar-actions{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+}
+
+.calendar-actions ul{
+    margin: 0;
+    padding: 0;
+}
+
+.calendar-container{
+    margin-top: 1rem;
+}
+
+#description{
+    width: 100%;
+    border-radius: 5px;
+}
+
+.modal-label{
+    color: black !important;
+}

@@ -18,6 +18,10 @@ type User {
     createdEvents: [Event!]!
 }
 
+type UserId {
+    userId: ID!
+}
+
 type AuthData {
     userId: ID!
     token: String!
@@ -43,6 +47,7 @@ input AddShareHoldersInput{
 
 type RootQuery {
     events: [Event!]!
+    user(email: String!): UserId!
     userEvents(userId: ID!): [Event!]!
     login(email: String!, password: String!): AuthData!
 }

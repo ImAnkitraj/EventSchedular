@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
+import BackDrop from '../../components/Backdrop/Backdrop';
+import authContext from '../../context/auth-context';
 import './Auth.css';
-// import AuthContext from '../context/auth-context'
 
 class Auth extends Component {
     state = {
         isLogin: true,
     };
 
-    // static contextType = AuthContext;
+    static contextType = authContext;
     constructor(props){
         super(props);
         this.emailEl = React.createRef();
@@ -94,6 +95,7 @@ class Auth extends Component {
     }
     render() {
         return (
+            <>
             <form className='auth-form' onSubmit={this.submitHandler}>
                 <div className='form-control'>
                     <label htmlFor="email">E-mail</label>
@@ -110,6 +112,7 @@ class Auth extends Component {
                     </button>
                 </div>
             </form>
+            </>
         )
     }
 }
