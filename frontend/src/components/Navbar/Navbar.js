@@ -12,7 +12,7 @@ function Navbar() {
                 return (
                     <header className='main-navigation'>
                         <div className='main-navigation__logo'>
-                            <h1>My Calendar</h1>
+                            <h1>AI Calendar</h1>
                         </div>
                         <nav className ='main-navigation__items'>
                             <ul>

@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
 import BackDrop from '../../components/Backdrop/Backdrop';
+import Modal from '../../components/Modal/Modal';
 import authContext from '../../context/auth-context';
 import './Auth.css';
 
 class Auth extends Component {
     state = {
         isLogin: true,
+        errorText: '',
+        isError:false,
     };
 
     static contextType = authContext;
@@ -86,16 +89,39 @@ class Auth extends Component {
                 }
             }
             else{
-                //Signup logic return valie handling
+                if(resData.errors){
+                    this.setState(prevState => {return {...prevState,errorText:resData.errors[0].message}});
+                    console.log(this.state.errorText)
+
+                }
+                else{
+                    this.setState(prevState => {return {...prevState,errorText:'Successfully signed Up, Now try to login'}});
+                    console.log(this.state.errorText,)
+                }
             }
         })
         .catch(err => {
-            console.log(err)
+            this.setState(prevState => {return {...prevState,errorText:err.toString()}});
+            console.log(this.state.errorText)
+        })
+    }
+
+    closeModal = () => {
+        this.setState(prevState => {
+            return {...prevState, errorText:''}
         })
     }
     render() {
         return (
             <>
+            {this.state.errorText.trim() && <BackDrop/>}
+            {this.state.errorText.trim() && <Modal
+                canCancel
+                title="Message from AI Calendar"
+                onCancel={this.closeModal}
+            >
+                {this.state.errorText}
+            </Modal>}
             <form className='auth-form' onSubmit={this.submitHandler}>
                 <div className='form-control'>
                     <label htmlFor="email">E-mail</label>

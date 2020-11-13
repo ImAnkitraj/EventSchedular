@@ -11,22 +11,22 @@ import EventList from '../../components/EventList/EventList';
 
 function Calendar() {
     const context = React.useContext(authContext);
-    const [errorText, setErrorText] = React.useState();
+    const [errorText, setErrorText] = React.useState('');
     const [isError, setIsError] = React.useState(false);
     const [calendarEvents, setCalendarEvents] = React.useState([]);
-    const [shareUserId, setShareUserId] = React.useState();
-    const [event, setEvent] = React.useState()
-    const [shareEventId, setShareEventId] = React.useState();
-    const [email, setEmail] = React.useState();
+    const [shareUserId, setShareUserId] = React.useState('');
+    const [event, setEvent] = React.useState([])
+    const [shareEventId, setShareEventId] = React.useState('');
+    const [email, setEmail] = React.useState('');
     const [isLoading, setIsLoading] = React.useState(false);
     const [modalEventOpen, setEventModalOpen] = React.useState(false)
     const [modalDetailOpen, setDetailModalOpen] = React.useState(false)
     const [modalShareOpen, setShareModalOpen] = React.useState(false)
-    const [title, setTitle] = React.useState();
-    const [start, setStart] = React.useState();
-    const [end, setEnd] = React.useState();
+    const [title, setTitle] = React.useState('');
+    const [start, setStart] = React.useState('');
+    const [end, setEnd] = React.useState('');
     const [events, setEvents] = React.useState([])
-    const [description, setDescription] = React.useState();
+    const [description, setDescription] = React.useState('');
 
     React.useEffect(()=>{
         fetchEvents();
@@ -70,7 +70,7 @@ function Calendar() {
             return res.json();
         })
         .then(resData => {
-            console.log(resData.data.userEvents);
+            console.log('fetch result ',resData);
             setIsLoading(false);
             return resData.data.userEvents;
         })
@@ -312,8 +312,8 @@ function Calendar() {
 
 
         <div className='container'>
-            <ul className='calendar-actions'> 
-                <li><button className='btn' onClick={()=>{setEventModalOpen(true)}}>+ Add Event</button></li>
+            <ul onClick={()=>{setEventModalOpen(true)}}className='calendar-actions'> 
+                <li style={{fontSize:"40px"}} >+</li>
             </ul>
             <div className='calendar-container'>
                 <FullCalendar
@@ -323,6 +323,7 @@ function Calendar() {
                         center: "title",
                         right: "dayGridMonth,timeGridWeek,timeGridDay"
                     }}
+                    weekends={true}
                     plugins={[dayGridPlugin, timeGridPlugin]}
                     events={[...calendarEvents]}
                 />
