@@ -23,10 +23,13 @@ app.use((req, res, next)=>{
 })
 app.use(isAuth);
 
+app.get('/', (req,res) => {
+    res.send('Welcome to graphql Backend')
+})
 app.use('/graphql',graphqlHTTP({
     schema: graphQlSchema,
     rootValue: graphQlResolvers,
-    graphiql: true,
+    // graphiql: true,
 }));
 
 mongoose.connect(process.env.MONGO_URL)
