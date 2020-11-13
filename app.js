@@ -32,7 +32,7 @@ app.use('/graphql',graphqlHTTP({
 mongoose.connect(process.env.MONGO_URL)
 .then(()=>{
     console.log('Db connected')
-    app.listen(8000, function(){
+    app.listen(process.env.PORT, function(){
         console.log('Server started')
     });
     
